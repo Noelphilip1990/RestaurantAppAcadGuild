@@ -1,0 +1,65 @@
+<div class="container">
+    <h3>Restaurant's in <b style="font-family:italic;color:grey">{{SearchPlaces}}</b></h3>
+<div class="row">
+   <div class="col-md-6">   
+      <div class="form-group">
+        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+      </div>
+      <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <!-- Show Markers according to list data !-->
+        <sebm-google-map-marker 
+          *ngFor="let m of list; let i = index"
+          
+          [latitude]="m.geometry.location.lat"
+          [longitude]="m.geometry.location.lng"
+          [label]="Hello"
+          [markerDraggable]="false"
+          (dragEnd)="markerDragEnd(m, $event)">
+        <!-- Info Window display data on click!-->  
+        <sebm-google-map-info-window>
+            <h2>{{m.name}}</h2>
+          <strong>{{m.formatted_address}}</strong>
+        </sebm-google-map-info-window>
+        
+      </sebm-google-map-marker>
+
+      </sebm-google-map>
+      </div>
+      <div class="col-md-6">
+      <h1>Restaurant Lists</h1>
+      <div class="panel panel-default" *ngFor="let m of list | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
+      <div style="background-color:#277BB0;color:white;" class="panel-heading">
+      <h3 class="panel-title"><b>{{m.name}}</b></h3>
+      </div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img style="border:1px solid red;" class="media-object img-circle" src="{{m.icon}}" alt="pic">
+            </a>
+          </div>
+          <div  class="media-body">
+            <h5 class="media-heading">{{m.formatted_address}}</h5>
+            <div *ngIf="m.opening_hours">
+            <small style="color:red;float:right;" *ngIf="!m.opening_hours.open_now">CLOSED</small>
+            <small style="color:green;float:right;" *ngIf="m.opening_hours.open_now">OPEN</small>
+            </div>
+            <div>
+            <label  style="color:green;float:left"class="control-label">Rating</label>
+            <!--For rating display!-->
+          <rating [(ngModel)]="rating[i]"
+            [max]="5"
+            [float]="true"
+            [readonly]="true"
+            [titles]="['one', 'two', 'three', 'four', 'five']">
+          </rating>
+          </div>
+        
+      </div>
+      </div>
+      </div>
+
+      </div>
+      <pagination-controls (pageChange)="p = $event" #api></pagination-controls>
+      </div>
+    </div>
