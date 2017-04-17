@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Restaurant's in <b style="font-family:italic;color:grey">{{SearchPlaces}}</b></h3>
+    <h3 style="color:white">Restaurant's in <b style="font-family:italic;color:black;background-color:#C8C8C8">{{SearchPlaces}}</b></h3>
 <div class="row">
    <div class="col-md-6">   
       <div class="form-group">
@@ -26,7 +26,7 @@
       </sebm-google-map>
       </div>
       <div class="col-md-6">
-      <h1>Restaurant Lists</h1>
+      <h1 style="color:white">Restaurant Lists</h1>
       <div class="panel panel-default" *ngFor="let m of list | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
       <div style="background-color:#277BB0;color:white;" class="panel-heading">
       <h3 class="panel-title"><b>{{m.name}}</b></h3>

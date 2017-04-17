@@ -4,11 +4,20 @@ import { AgmCoreModule, MapsAPILoader } from 'angular2-google-maps/core';
 import{ MapService } from './MapService';
 import { Map } from './model/map';
 import { RatingModule } from "ng2-rating";
+import {Ng2PaginationModule} from 'ng2-pagination';
 @Component({
   selector: 'my-map',
   styles: [`
     .sebm-google-map-container {
        height: 400px;
+     }
+     .ng2-pagination li
+     {
+       background-color:#C8C8C8;
+     }
+     .pagination-previous
+     {
+       background-color:green;
      }
   `],
   templateUrl: "MapComponentHTML.html"
